@@ -1,9 +1,11 @@
 import torch
 import torchvision.datasets
 import torchvision.transforms as transforms
+from torchvision import transforms
 from torch.utils.data import DataLoader
 import models
 from models import MNIST_target_net
+import matplotlib.pyplot as plt
 
 use_cuda=True
 image_nc=1

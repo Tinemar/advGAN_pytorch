@@ -24,7 +24,7 @@ model_num_labels = 10
 
 # MNIST train dataset and dataloader declaration
 mnist_dataset = torchvision.datasets.MNIST('./dataset', train=True, transform=transforms.ToTensor(), download=True)
-dataloader = DataLoader(mnist_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
+dataloader = DataLoader(mnist_dataset, batch_size=batch_size, shuffle=True, num_workers=0)
 advGAN = AdvGAN_Attack(device,
                           targeted_model,
                           model_num_labels,

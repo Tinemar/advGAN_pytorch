@@ -65,11 +65,16 @@ class AdvGAN_Attack:
             self.optimizer_D.zero_grad()
             pred_real = self.netDisc(x)
             loss_D_real = F.mse_loss(pred_real, torch.ones_like(pred_real, device=self.device))
+            
+            #real loss
             loss_D_real.backward()
 
             pred_fake = self.netDisc(adv_images.detach())
             loss_D_fake = F.mse_loss(pred_fake, torch.zeros_like(pred_fake, device=self.device))
+
+            #fake loss
             loss_D_fake.backward()
+
             loss_D_GAN = loss_D_fake + loss_D_real
             self.optimizer_D.step()
 

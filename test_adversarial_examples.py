@@ -29,7 +29,7 @@ pretrained_G.eval()
 
 # test adversarial examples in MNIST training dataset
 mnist_dataset = torchvision.datasets.MNIST('./dataset', train=True, transform=transforms.ToTensor(), download=True)
-train_dataloader = DataLoader(mnist_dataset, batch_size=batch_size, shuffle=False, num_workers=1)
+train_dataloader = DataLoader(mnist_dataset, batch_size=batch_size, shuffle=False, num_workers=0)
 num_correct = 0
 for i, data in enumerate(train_dataloader, 0):
     test_img, test_label = data
@@ -47,7 +47,7 @@ print('accuracy of adv imgs in training set: %f\n'%(num_correct.item()/len(mnist
 
 # test adversarial examples in MNIST testing dataset
 mnist_dataset_test = torchvision.datasets.MNIST('./dataset', train=False, transform=transforms.ToTensor(), download=True)
-test_dataloader = DataLoader(mnist_dataset_test, batch_size=batch_size, shuffle=False, num_workers=1)
+test_dataloader = DataLoader(mnist_dataset_test, batch_size=batch_size, shuffle=False, num_workers=0)
 num_correct = 0
 for i, data in enumerate(test_dataloader, 0):
     test_img, test_label = data

@@ -37,8 +37,8 @@ class AdvGAN_Attack:
         self.box_max = box_max
 
         self.gen_input_nc = image_nc
-        self.netG = models.Generator(self.gen_input_nc, image_nc).to(device)
-        self.netDisc = models.Discriminator(image_nc).to(device)
+        self.netG = models.Generator_cifar10(self.gen_input_nc, image_nc).to(device)
+        self.netDisc = models.Discriminator_cifar10(image_nc).to(device)
 
         # initialize all weights
         self.netG.apply(weights_init)
@@ -57,7 +57,6 @@ class AdvGAN_Attack:
         # optimize D
         for i in range(1):
             perturbation = self.netG(x)
-
             # add a clipping trick
             adv_images = torch.clamp(perturbation, -0.3, 0.3) + x
             adv_images = torch.clamp(adv_images, self.box_min, self.box_max)
@@ -79,7 +78,7 @@ class AdvGAN_Attack:
             self.optimizer_D.step()
 
         # optimize G
-        for i in range(1):
+        for i in range(1): 
             self.optimizer_G.zero_grad()
 
             # cal G's loss in GAN
@@ -136,7 +135,6 @@ class AdvGAN_Attack:
             for i, data in enumerate(train_dataloader, start=0):
                 images, labels = data
                 images, labels = images.to(self.device), labels.to(self.device)
-
                 loss_D_batch, loss_G_fake_batch, loss_perturb_batch, loss_adv_batch = \
                     self.train_batch(images, labels)
                 loss_D_sum += loss_D_batch

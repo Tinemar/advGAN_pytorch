@@ -1,4 +1,9 @@
-/dataset
-/models
-/__pycache__
-/.vscode
+models
+__pycache__
+.vscode
+dataset
+results
+target_models
+.vs
+__pycache__/advGAN.cpython-36.pyc
+__pycache__/models.cpython-36.pyc
